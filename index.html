@@ -131,21 +131,23 @@
             
             // Akustisches Signal beim Erreichen von 0
             if (!soundPlayed) {
-              const audio = new Audio('gong.mp3');
+              const audio = new Audio('gong.wav');
               audio.play().catch(e => console.log('Audio play failed:', e));
               soundPlayed = true;
             }
             return;
           }
           
-          const mins = Math.floor(diff / 60000);
-          const secs = Math.floor((diff % 60000) / 1000);
+          const totalSeconds = Math.floor(diff / 1000);
+          const mins = Math.floor(totalSeconds / 60);
+          const secs = totalSeconds % 60;
           
-          // Farbe ändern in letzter Minute
-          if (mins === 0) {
-            element.parentElement.querySelector('strong').style.color = '#cc0000';
+          // Farbe ändern wenn unter 1 Minute (also nur noch Sekunden)
+          const strongElement = element.parentElement.querySelector('strong');
+          if (totalSeconds < 60) {
+            strongElement.style.color = '#cc0000';
           } else {
-            element.parentElement.querySelector('strong').style.color = '#0066cc';
+            strongElement.style.color = '#0066cc';
           }
           
           element.textContent = `${mins}:${secs.toString().padStart(2, '0')} Minuten`;
@@ -159,7 +161,7 @@
         createTimer('timer1', '10:55');
         createTimer('timer2', '11:15');
         createTimer('timer3', '11:25');
-        createTimer('timer4', '21:45');
+        createTimer('timer4', '11:45');
       });
     </script>
   </body>
