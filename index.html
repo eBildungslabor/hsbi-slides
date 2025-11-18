@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>TITLE</title>
+
+    <link rel="stylesheet" href="reveal.js/dist/reset.css" />
+    <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="reveal.js/dist/theme/solarized.css"
+      id="theme"
+    />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="reveal.js/plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          data-markdown
+          data-separator="-----"
+          data-separator-vertical="---"
+        >
+          <textarea data-template>
+            # Title Page
+
+            ### Date
+
+            -----
+            ## Fragment <!-- .element: class="fragment" -->
+            -----
+            ## Start visible, fade out <!-- .element: class="fragment fade-out" -->
+            -----
+            ## Slide up while fading in <!-- .element: class="fragment fade-up" -->
+            -----
+            ## Slide down while fading in <!-- .element: class="fragment fade-down" -->
+            -----
+            ## Slide left while fading in <!-- .element: class="fragment fade-left" -->
+            -----
+            ## Slide right while fading in <!-- .element: class="fragment fade-right" -->
+            -----
+            ## Fades in, then out on the next step <!-- .element: class="fragment fade-in-then-out" -->
+            -----
+            ## Fades in, then out on the next step <!-- .element: class="fragment current-visible" -->
+            -----
+            ## Fades in, then to 50% on the next step <!-- .element: class="fragment fade-in-then-semi-out" -->
+            -----
+            ## Scale up <!-- .element: class="fragment grow" -->
+            -----
+            ## Fade out to 50% <!-- .element: class="fragment semi-fade-out" -->
+            -----
+            ## Scale down <!-- .element: class="fragment shrink" -->
+            -----
+            ## Strike through <!-- .element: class="fragment strike" -->
+            -----
+            ## Turn text red <!-- .element: class="fragment highlight-red" -->
+            -----
+            ## Turn text green <!-- .element: class="fragment highlight-green" -->
+            -----
+            ## Turn text blue <!-- .element: class="fragment highlight-blue" -->
+            -----
+            ## Turn text red, then back to original on next step <!-- .element: class="fragment highlight-current-red" -->
+            -----
+            ## Turn text green, then back to original on next step <!-- .element: class="fragment highlight-current-green" -->
+            -----
+            ## Turn text blue, then back to original on next step <!-- .element: class="fragment highlight-current-blue" -->
+            -----
+
+            ## made with
+
+            #### [reveal.js](https://github.com/hakimel/reveal.js)
+            #### and
+            #### [CREATE-NEW-REVEAL.JS](https://github.com/pacharanero/create-new-revealjs-template)
+
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="reveal.js/dist/reveal.js"></script>
+    <script src="reveal.js/plugin/notes/notes.js"></script>
+    <script src="reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="reveal.js/plugin/zoom/zoom.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      });
+    </script>
+  </body>
+</html>
