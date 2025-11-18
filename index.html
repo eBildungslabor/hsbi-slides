@@ -30,6 +30,10 @@
       .timer-box strong {
         color: #0066cc;
         font-size: 1.4em;
+        transition: color 0.3s;
+      }
+      .timer-box.urgent strong {
+        color: #cc0000;
       }
       .done {
         color: green;
@@ -129,7 +133,6 @@
             element.innerHTML = '<span class="done">jetzt!</span>';
             element.parentElement.style.background = '#d4edda';
             
-            // Akustisches Signal beim Erreichen von 0
             if (!soundPlayed) {
               const audio = new Audio('gong.wav');
               audio.play().catch(e => console.log('Audio play failed:', e));
@@ -142,12 +145,11 @@
           const mins = Math.floor(totalSeconds / 60);
           const secs = totalSeconds % 60;
           
-          // Farbe ändern wenn unter 1 Minute (also nur noch Sekunden)
-          const strongElement = element.parentElement.querySelector('strong');
+          // CSS-Klasse hinzufügen/entfernen
           if (totalSeconds < 60) {
-            strongElement.style.color = '#cc0000';
+            element.parentElement.classList.add('urgent');
           } else {
-            strongElement.style.color = '#0066cc';
+            element.parentElement.classList.remove('urgent');
           }
           
           element.textContent = `${mins}:${secs.toString().padStart(2, '0')} Minuten`;
@@ -161,7 +163,7 @@
         createTimer('timer1', '10:55');
         createTimer('timer2', '11:15');
         createTimer('timer3', '11:25');
-        createTimer('timer4', '21:51');
+        createTimer('timer4', '21:56');
       });
     </script>
   </body>
