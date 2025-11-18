@@ -6,9 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-
-    <title>TITLE</title>
-
+    <title>Vernetzen. Austauschen. Gestalten.</title>
     <link rel="stylesheet" href="reveal.js/dist/reset.css" />
     <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
     <link
@@ -16,13 +14,31 @@
       href="reveal.js/dist/theme/solarized.css"
       id="theme"
     />
-
-    <!-- Theme used for syntax highlighted code -->
     <link
       rel="stylesheet"
       href="reveal.js/plugin/highlight/monokai.css"
       id="highlight-theme"
     />
+    <style>
+      .countdown {
+        font-size: 2em;
+        margin: 30px 0;
+        padding: 20px;
+        background: #f0f0f0;
+        border-radius: 10px;
+      }
+      .countdown strong {
+        color: #0066cc;
+      }
+      .signal {
+        font-size: 3em;
+        animation: pulse 1s infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    </style>
   </head>
   <body>
     <div class="reveal">
@@ -33,76 +49,106 @@
           data-separator-vertical="---"
         >
           <textarea data-template>
-            # Title Page
-
-            ### Date
-
+            # Vernetzen.
+            # Austauschen.
+            # Gestalten.
+            Ein Prototyp zum Mitmachen.
+            
+            <div class="countdown" data-target="10:10" data-type="start"></div>
             -----
-            ## Fragment <!-- .element: class="fragment" -->
+            ## Schritt 1: Themensammlung
+            Notiere auf einer Karte ein (möglichst konkretes) Thema oder eine Frage, die für dich im Kontext der Hochschullehre zurzeit besonders relevant ist.
             -----
-            ## Start visible, fade out <!-- .element: class="fragment fade-out" -->
+            ## Schritt 2: Themenclusterung
+            Bewegt euch durch den Raum und stellt euch in Paargesprächen Eure Themen vor!
+            
+            1. Beide finden ihr Thema wichtiger → Karten behalten.
+            2. Beide finden das jeweils andere Thema wichtiger → Karten tauschen
+            3. Beide finden ein Thema wichtiger als das andere → Mit dieser Karte als Gruppe weitermachen.
             -----
-            ## Slide up while fading in <!-- .element: class="fragment fade-up" -->
+            ## Schritt 3: Sessionplanung
+            Wir nehmen die am höchsten bewerteten Themen in unseren Sessionplan auf!
             -----
-            ## Slide down while fading in <!-- .element: class="fragment fade-down" -->
+            ## Slot 1
+            Wähle dir ein Thema und begib dich an den angegebenen Ort, um darüber 20 Minuten lang mit Kolleg\*innen in einen Austausch zu gehen.
+            
+            <div class="countdown" data-target="11:45" data-type="start"></div>
             -----
-            ## Slide left while fading in <!-- .element: class="fragment fade-left" -->
+            ## Slot 1
+            
+            <div class="countdown" data-target="12:05" data-type="end"></div>
             -----
-            ## Slide right while fading in <!-- .element: class="fragment fade-right" -->
+            ## Slot 2
+            Wähle dir ein Thema und begib dich an den angegebenen Ort, um darüber 20 Minuten lang mit Kolleg\*innen in einen Austausch zu gehen.
+            
+            <div class="countdown" data-target="12:15" data-type="start"></div>
             -----
-            ## Fades in, then out on the next step <!-- .element: class="fragment fade-in-then-out" -->
+            ## Slot 2
+            
+            <div class="countdown" data-target="12:35" data-type="end"></div>
             -----
-            ## Fades in, then out on the next step <!-- .element: class="fragment current-visible" -->
+            ## Abschluss
+            Was willst du teilen?
             -----
-            ## Fades in, then to 50% on the next step <!-- .element: class="fragment fade-in-then-semi-out" -->
-            -----
-            ## Scale up <!-- .element: class="fragment grow" -->
-            -----
-            ## Fade out to 50% <!-- .element: class="fragment semi-fade-out" -->
-            -----
-            ## Scale down <!-- .element: class="fragment shrink" -->
-            -----
-            ## Strike through <!-- .element: class="fragment strike" -->
-            -----
-            ## Turn text red <!-- .element: class="fragment highlight-red" -->
-            -----
-            ## Turn text green <!-- .element: class="fragment highlight-green" -->
-            -----
-            ## Turn text blue <!-- .element: class="fragment highlight-blue" -->
-            -----
-            ## Turn text red, then back to original on next step <!-- .element: class="fragment highlight-current-red" -->
-            -----
-            ## Turn text green, then back to original on next step <!-- .element: class="fragment highlight-current-green" -->
-            -----
-            ## Turn text blue, then back to original on next step <!-- .element: class="fragment highlight-current-blue" -->
-            -----
-
-            ## made with
-
-            #### [reveal.js](https://github.com/hakimel/reveal.js)
-            #### and
-            #### [CREATE-NEW-REVEAL.JS](https://github.com/pacharanero/create-new-revealjs-template)
-
+            ## Danke! ❤️
+            Vernetzung und Inspirationen zu gutem Lernen im digitalen Wandel
+            - Fediverse: @nele@fedilab.de
+            - Web: ebildungslabor.de
           </textarea>
         </section>
       </div>
     </div>
-
     <script src="reveal.js/dist/reveal.js"></script>
     <script src="reveal.js/plugin/notes/notes.js"></script>
     <script src="reveal.js/plugin/markdown/markdown.js"></script>
     <script src="reveal.js/plugin/highlight/highlight.js"></script>
     <script src="reveal.js/plugin/zoom/zoom.js"></script>
     <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
       Reveal.initialize({
         hash: true,
-
-        // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
       });
+
+      // Timer-Funktion
+      function startCountdowns() {
+        document.querySelectorAll('.countdown').forEach(element => {
+          const targetTime = element.getAttribute('data-target');
+          const type = element.getAttribute('data-type');
+          
+          const [hours, minutes] = targetTime.split(':');
+          const target = new Date();
+          target.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+          
+          function update() {
+            const now = new Date();
+            const diff = target - now;
+            
+            if (diff <= 0) {
+              if (type === 'start') {
+                element.innerHTML = '<span class="signal">🔔 START!</span>';
+              } else {
+                element.innerHTML = '<span class="signal">⏰ ENDE!</span>';
+              }
+              return;
+            }
+            
+            const mins = Math.floor(diff / 60000);
+            const secs = Math.floor((diff % 60000) / 1000);
+            
+            if (type === 'start') {
+              element.innerHTML = `Noch <strong>${mins}:${secs.toString().padStart(2, '0')} min</strong> bis zum Start`;
+            } else {
+              element.innerHTML = `Noch <strong>${mins}:${secs.toString().padStart(2, '0')} min</strong> bis zum Ende`;
+            }
+          }
+          
+          update();
+          setInterval(update, 1000);
+        });
+      }
+
+      // Starte Timer nach dem Reveal.js geladen ist
+      Reveal.on('ready', startCountdowns);
     </script>
   </body>
 </html>
