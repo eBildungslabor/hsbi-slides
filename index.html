@@ -20,23 +20,21 @@
       id="highlight-theme"
     />
     <style>
-      .countdown {
-        font-size: 2em;
-        margin: 30px 0;
-        padding: 20px;
+      .timer-box {
+        margin: 40px 0;
+        padding: 30px;
         background: #f0f0f0;
-        border-radius: 10px;
+        border-radius: 8px;
+        font-size: 1.5em;
       }
-      .countdown strong {
+      .timer-box strong {
         color: #0066cc;
+        font-size: 1.4em;
       }
-      .signal {
-        font-size: 3em;
-        animation: pulse 1s infinite;
-      }
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
+      .done {
+        color: green;
+        font-weight: bold;
+        font-size: 2em;
       }
     </style>
   </head>
@@ -53,8 +51,6 @@
             # Austauschen.
             # Gestalten.
             Ein Prototyp zum Mitmachen.
-            
-            <div class="countdown" data-target="10:10" data-type="start"></div>
             -----
             ## Schritt 1: Themensammlung
             Notiere auf einer Karte ein (möglichst konkretes) Thema oder eine Frage, die für dich im Kontext der Hochschullehre zurzeit besonders relevant ist.
@@ -68,25 +64,30 @@
             -----
             ## Schritt 3: Sessionplanung
             Wir nehmen die am höchsten bewerteten Themen in unseren Sessionplan auf!
-            -----
-            ## Slot 1
-            Wähle dir ein Thema und begib dich an den angegebenen Ort, um darüber 20 Minuten lang mit Kolleg\*innen in einen Austausch zu gehen.
-            
-            <div class="countdown" data-target="11:45" data-type="start"></div>
-            -----
-            ## Slot 1
-            
-            <div class="countdown" data-target="12:05" data-type="end"></div>
-            -----
-            ## Slot 2
-            Wähle dir ein Thema und begib dich an den angegebenen Ort, um darüber 20 Minuten lang mit Kolleg\*innen in einen Austausch zu gehen.
-            
-            <div class="countdown" data-target="12:15" data-type="start"></div>
-            -----
-            ## Slot 2
-            
-            <div class="countdown" data-target="12:35" data-type="end"></div>
-            -----
+          </textarea>
+        </section>
+        <section>
+          <div class="timer-box">
+            Die ersten Sessions starten in <strong><span id="timer1"></span></strong> um 10:55 Uhr
+          </div>
+        </section>
+        <section>
+          <div class="timer-box">
+            Die ersten Sessions enden in <strong><span id="timer2"></span></strong> um 11:15 Uhr
+          </div>
+        </section>
+        <section>
+          <div class="timer-box">
+            Die zweiten Sessions starten in <strong><span id="timer3"></span></strong> um 11:25 Uhr
+          </div>
+        </section>
+        <section>
+          <div class="timer-box">
+            Die zweiten Sessions enden in <strong><span id="timer4"></span></strong> um 11:45 Uhr
+          </div>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
             ## Abschluss
             Was willst du teilen?
             -----
@@ -109,46 +110,37 @@
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
       });
 
-      // Timer-Funktion
-      function startCountdowns() {
-        document.querySelectorAll('.countdown').forEach(element => {
-          const targetTime = element.getAttribute('data-target');
-          const type = element.getAttribute('data-type');
+      function createTimer(elementId, targetTime) {
+        const element = document.getElementById(elementId);
+        const [hours, minutes] = targetTime.split(':');
+        const target = new Date();
+        target.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+        
+        function update() {
+          const now = new Date();
+          const diff = target - now;
           
-          const [hours, minutes] = targetTime.split(':');
-          const target = new Date();
-          target.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-          
-          function update() {
-            const now = new Date();
-            const diff = target - now;
-            
-            if (diff <= 0) {
-              if (type === 'start') {
-                element.innerHTML = '<span class="signal">🔔 START!</span>';
-              } else {
-                element.innerHTML = '<span class="signal">⏰ ENDE!</span>';
-              }
-              return;
-            }
-            
-            const mins = Math.floor(diff / 60000);
-            const secs = Math.floor((diff % 60000) / 1000);
-            
-            if (type === 'start') {
-              element.innerHTML = `Noch <strong>${mins}:${secs.toString().padStart(2, '0')} min</strong> bis zum Start`;
-            } else {
-              element.innerHTML = `Noch <strong>${mins}:${secs.toString().padStart(2, '0')} min</strong> bis zum Ende`;
-            }
+          if (diff <= 0) {
+            element.innerHTML = '<span class="done">jetzt!</span>';
+            element.parentElement.style.background = '#d4edda';
+            return;
           }
           
-          update();
-          setInterval(update, 1000);
-        });
+          const mins = Math.floor(diff / 60000);
+          const secs = Math.floor((diff % 60000) / 1000);
+          element.textContent = `${mins}:${secs.toString().padStart(2, '0')} Minuten`;
+        }
+        
+        update();
+        setInterval(update, 1000);
       }
 
-      // Starte Timer nach dem Reveal.js geladen ist
-      Reveal.on('ready', startCountdowns);
+      Reveal.on('ready', () => {
+        createTimer('timer1', '10:55');
+        createTimer('timer2', '11:15');
+        createTimer('timer3', '11:25');
+        createTimer('timer4', '11:45');
+      });
     </script>
   </body>
 </html>
