@@ -28,12 +28,14 @@
         font-size: 1.5em;
       }
       .timer-box strong {
-        color: #0066cc;
         font-size: 1.4em;
+      }
+      .timer-box strong span {
+        color: #0066cc;
         transition: color 0.3s;
       }
-      .timer-box.urgent strong {
-        color: #cc0000;
+      .timer-box.urgent strong span {
+        color: #cc0000 !important;
       }
       .done {
         color: green;
@@ -50,13 +52,11 @@
           <h1>Vernetzen. Austauschen. Gestalten.</h1>
           <p>Ein Prototyp zum Mitmachen.</p>
         </section>
-        
         <!-- Folie 2 -->
         <section>
           <h2>Schritt 1: Themensammlung</h2>
           <p>Notiere auf einer Karte ein (möglichst konkretes) Thema oder eine Frage, die für dich im Kontext der Hochschullehre zurzeit besonders relevant ist.</p>
         </section>
-        
         <!-- Folie 3 -->
         <section>
           <h2>Schritt 2: Themenclusterung</h2>
@@ -67,47 +67,40 @@
             <li>Beide finden ein Thema wichtiger als das andere → Mit dieser Karte als Gruppe weitermachen.</li>
           </ol>
         </section>
-        
         <!-- Folie 4 -->
         <section>
           <h2>Schritt 3: Sessionplanung</h2>
           <p>Wir nehmen die am höchsten bewerteten Themen in unseren Sessionplan auf!</p>
         </section>
-        
         <!-- Folie 5 -->
         <section>
-          <div class="timer-box">
-            Sessionslot I startet in <strong><span id="timer1"></span></strong> um 10:55 Uhr
+          <div class="timer-box" id="box1">
+            Sessionslot I startet in <br><strong><span id="timer1"></span></strong> um 10:55 Uhr
           </div>
         </section>
-        
         <!-- Folie 6 -->
         <section>
-          <div class="timer-box">
-           Sessionslot I endet in <strong><span id="timer2"></span></strong> um 11:15 Uhr
+          <div class="timer-box" id="box2">
+           Sessionslot I endet in <br><strong><span id="timer2"></span></strong> um 11:15 Uhr
           </div>
         </section>
-        
         <!-- Folie 7 -->
         <section>
-          <div class="timer-box">
-            Sessionslot II startet in <strong><span id="timer3"></span></strong> um 11:25 Uhr
+          <div class="timer-box" id="box3">
+            Sessionslot II startet in <br><strong><span id="timer3"></span></strong> um 11:25 Uhr
           </div>
         </section>
-        
         <!-- Folie 8 -->
         <section>
-          <div class="timer-box">
-            Sessionslot II endet in <strong><span id="timer4"></span></strong> um 11:45 Uhr
+          <div class="timer-box" id="box4">
+            Sessionslot II endet in <br><strong><span id="timer4"></span></strong> um 11:45 Uhr
           </div>
         </section>
-        
         <!-- Folie 9 -->
         <section>
           <h2>Abschluss</h2>
           <p>Was willst du teilen?</p>
         </section>
-        
         <!-- Folie 10 -->
         <section>
           <h2>Danke! ❤️</h2>
@@ -129,23 +122,19 @@
         hash: true,
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
       });
-
-      function createTimer(elementId, targetTime) {
+      function createTimer(elementId, targetTime, boxId) {
         const element = document.getElementById(elementId);
+        const box = document.getElementById(boxId);
         const [hours, minutes] = targetTime.split(':');
         const target = new Date();
         target.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-        
         let soundPlayed = false;
-        
         function update() {
           const now = new Date();
           const diff = target - now;
-          
           if (diff <= 0) {
             element.innerHTML = '<span class="done">jetzt!</span>';
-            element.parentElement.style.background = '#d4edda';
-            
+            box.style.background = '#d4edda';
             if (!soundPlayed) {
               const audio = new Audio('gong.wav');
               audio.play().catch(e => console.log('Audio play failed:', e));
@@ -153,29 +142,24 @@
             }
             return;
           }
-          
           const totalSeconds = Math.floor(diff / 1000);
           const mins = Math.floor(totalSeconds / 60);
           const secs = totalSeconds % 60;
-          
           if (totalSeconds < 60) {
-            element.parentElement.classList.add('urgent');
+            box.classList.add('urgent');
           } else {
-            element.parentElement.classList.remove('urgent');
+            box.classList.remove('urgent');
           }
-          
           element.textContent = `${mins}:${secs.toString().padStart(2, '0')} Minuten`;
         }
-        
         update();
         setInterval(update, 1000);
       }
-
       Reveal.on('ready', () => {
-        createTimer('timer1', '10:55');
-        createTimer('timer2', '11:15');
-        createTimer('timer3', '11:25');
-        createTimer('timer4', '22:52');
+        createTimer('timer1', '10:55', 'box1');
+        createTimer('timer2', '11:15', 'box2');
+        createTimer('timer3', '11:25', 'box3');
+        createTimer('timer4', '23:00', 'box4');
       });
     </script>
   </body>
