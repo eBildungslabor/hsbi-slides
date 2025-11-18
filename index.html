@@ -122,6 +122,7 @@
         hash: true,
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
       });
+      
       function createTimer(elementId, targetTime, boxId) {
         const element = document.getElementById(elementId);
         const box = document.getElementById(boxId);
@@ -129,6 +130,7 @@
         const target = new Date();
         target.setHours(parseInt(hours), parseInt(minutes), 0, 0);
         let soundPlayed = false;
+        let intervalId;
         
         function update() {
           const now = new Date();
@@ -162,13 +164,14 @@
         }
         
         update();
-        const intervalId = setInterval(update, 1000);
+        intervalId = setInterval(update, 1000);
       }
+      
       Reveal.on('ready', () => {
         createTimer('timer1', '10:55', 'box1');
         createTimer('timer2', '11:15', 'box2');
         createTimer('timer3', '11:25', 'box3');
-        createTimer('timer4', '23:08', 'box4');
+        createTimer('timer4', '23:14', 'box4');
       });
     </script>
   </body>
