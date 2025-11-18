@@ -45,55 +45,72 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section
-          data-markdown
-          data-separator="-----"
-          data-separator-vertical="---"
-        >
-          <textarea data-template>
-            # Vernetzen.
-            # Austauschen.
-            # Gestalten.
-            Ein Prototyp zum Mitmachen.
-            -----
-            ## Schritt 1: Themensammlung
-            Notiere auf einer Karte ein (möglichst konkretes) Thema oder eine Frage, die für dich im Kontext der Hochschullehre zurzeit besonders relevant ist.
-            -----
-            ## Schritt 2: Themenclusterung
-            Bewegt euch durch den Raum und stellt euch in Paargesprächen Eure Themen vor!
-            
-            1. Beide finden ihr Thema wichtiger → Karten behalten.
-            2. Beide finden das jeweils andere Thema wichtiger → Karten tauschen
-            3. Beide finden ein Thema wichtiger als das andere → Mit dieser Karte als Gruppe weitermachen.
-            -----
-            ## Schritt 3: Sessionplanung
-            Wir nehmen die am höchsten bewerteten Themen in unseren Sessionplan auf!
-          </textarea>
+        <!-- Folie 1 -->
+        <section>
+          <h1>Vernetzen.</h1>
+          <h1>Austauschen.</h1>
+          <h1>Gestalten.</h1>
+          <p>Ein Prototyp zum Mitmachen.</p>
         </section>
+        
+        <!-- Folie 2 -->
+        <section>
+          <h2>Schritt 1: Themensammlung</h2>
+          <p>Notiere auf einer Karte ein (möglichst konkretes) Thema oder eine Frage, die für dich im Kontext der Hochschullehre zurzeit besonders relevant ist.</p>
+        </section>
+        
+        <!-- Folie 3 -->
+        <section>
+          <h2>Schritt 2: Themenclusterung</h2>
+          <p>Bewegt euch durch den Raum und stellt euch in Paargesprächen Eure Themen vor!</p>
+          <ol>
+            <li>Beide finden ihr Thema wichtiger → Karten behalten.</li>
+            <li>Beide finden das jeweils andere Thema wichtiger → Karten tauschen</li>
+            <li>Beide finden ein Thema wichtiger als das andere → Mit dieser Karte als Gruppe weitermachen.</li>
+          </ol>
+        </section>
+        
+        <!-- Folie 4 -->
+        <section>
+          <h2>Schritt 3: Sessionplanung</h2>
+          <p>Wir nehmen die am höchsten bewerteten Themen in unseren Sessionplan auf!</p>
+        </section>
+        
+        <!-- Folie 5 -->
         <section>
           <div class="timer-box">
-            Die ersten Sessions starten in <strong><span id="timer1"></span></strong> um 10:55 Uhr
+            Sessionslot I startet in <strong><span id="timer1"></span></strong> um 10:55 Uhr
           </div>
         </section>
+        
+        <!-- Folie 6 -->
         <section>
           <div class="timer-box">
-            Die ersten Sessions enden in <strong><span id="timer2"></span></strong> um 11:15 Uhr
+           Sessionslot I endet in <strong><span id="timer2"></span></strong> um 11:15 Uhr
           </div>
         </section>
+        
+        <!-- Folie 7 -->
         <section>
           <div class="timer-box">
-            Die zweiten Sessions starten in <strong><span id="timer3"></span></strong> um 11:25 Uhr
+            Sessionslot II startet in <strong><span id="timer3"></span></strong> um 11:25 Uhr
           </div>
         </section>
+        
+        <!-- Folie 8 -->
         <section>
           <div class="timer-box">
-            Die zweiten Sessions enden in <strong><span id="timer4"></span></strong> um 11:45 Uhr
+            Sessionslot II endet in <strong><span id="timer4"></span></strong> um 11:45 Uhr
           </div>
         </section>
+        
+        <!-- Folie 9 -->
         <section>
           <h2>Abschluss</h2>
           <p>Was willst du teilen?</p>
         </section>
+        
+        <!-- Folie 10 -->
         <section>
           <h2>Danke! ❤️</h2>
           <p>Vernetzung und Inspirationen zu gutem Lernen im digitalen Wandel</p>
@@ -143,7 +160,6 @@
           const mins = Math.floor(totalSeconds / 60);
           const secs = totalSeconds % 60;
           
-          // CSS-Klasse hinzufügen/entfernen
           if (totalSeconds < 60) {
             element.parentElement.classList.add('urgent');
           } else {
@@ -161,7 +177,7 @@
         createTimer('timer1', '10:55');
         createTimer('timer2', '11:15');
         createTimer('timer3', '11:25');
-        createTimer('timer4', '22:10');
+        createTimer('timer4', '11:45');
       });
     </script>
   </body>
